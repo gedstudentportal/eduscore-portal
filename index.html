@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>EduScore Portal</title>
+<style>
+body{font-family:Arial,sans-serif;background:#eef3f8;margin:0}
+header{background:#1f5fae;color:#fff;padding:18px}
+.container{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 8px #0002}
+a.subject{color:#1f5fae;cursor:pointer;text-decoration:underline}
+.report{display:none}
+table{width:100%;border-collapse:collapse}td,th{border:1px solid #ccc;padding:8px}
+.bar{height:12px;background:#ddd;border-radius:6px}.fill{height:100%;background:#1f5fae;border-radius:6px}
+button{padding:8px 14px}
+</style></head><body>
+<header><h2>EduScore Portal</h2></header>
+<div id="home" class="container">
+<h3>Transcript</h3>
+<table><tr><th>Subject</th><th>Score</th></tr>
+<tr><td><a class="subject" onclick="openR('science')">Science</a></td><td>146</td></tr>
+<tr><td><a class="subject" onclick="openR('social')">Social Studies</a></td><td>153</td></tr>
+<tr><td><a class="subject" onclick="openR('rla')">Reasoning Through Language Arts</a></td><td>150</td></tr>
+<tr><td><a class="subject" onclick="openR('math')">Mathematical Reasoning</a></td><td>151</td></tr>
+</table></div>
+<script>
+const data={
+science:{score:146,areas:["Life Science",70,"Physical Science",65,"Earth & Space",60]},
+social:{score:153,areas:["Civics",80,"History",75,"Economics",70]},
+rla:{score:150,areas:["Reading",78,"Writing",70,"Grammar",74]},
+math:{score:151,areas:["Algebra",76,"Geometry",68,"Functions",73]}
+};
+for(const k in data){
+let d=data[k];
+let h=`<div class="container report" id="${k}"><h2>${k}</h2><p><b>Score:</b> ${d.score}</p>`;
+for(let i=0;i<d.areas.length;i+=2){h+=`${d.areas[i]}<div class='bar'><div class='fill' style='width:${d.areas[i+1]}%'></div></div>`}
+h+=`<p>This is a fictional sample report for demonstration purposes.</p><button onclick="back()">Back</button></div>`;
+document.body.insertAdjacentHTML('beforeend',h);
+}
+function openR(id){home.style.display='none';document.querySelectorAll('.report').forEach(x=>x.style.display='none');document.getElementById(id).style.display='block'}
+function back(){document.querySelectorAll('.report').forEach(x=>x.style.display='none');home.style.display='block'}
+</script></body></html>
